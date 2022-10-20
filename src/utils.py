@@ -36,9 +36,10 @@ def check_shell_stderr(stderr,
     # Convert to str
     stderr = stderr.decode('ascii')
 
-    if stderr.lower().__contains__("error"):
-        logging.exception(logging_output)
-        logging.error(stderr)
+    if (stderr.lower().__contains__("error") or
+       stderr.lower().__contains__("failed")):
+        logging.error(logging_output + "\n" + stderr)
+        raise Exception(logging_output)
 
 
 def rename_from_path(filename_path: pathlib.Path,
