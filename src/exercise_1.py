@@ -24,9 +24,6 @@ def cut_n_secs(filename_path: pathlib.Path, start: int,
 
     start_sexagesimal = str(datetime.timedelta(seconds=start))
     n_sexagesimal = str(datetime.timedelta(seconds=n_secs))
-    print(start_sexagesimal)
-    print(n_sexagesimal)
-    print("\n")
 
     cmd = ["ffmpeg", "-y", "-i", filename_path,
            "-ss", start_sexagesimal,
