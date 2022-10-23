@@ -14,8 +14,7 @@ def cut_n_secs(filename_path: pathlib.Path, start: int,
     :param start: starting time in seconds
     :param n_secs: number of seconds to cut
     :param output_filename: filename of the output video
-    :return: no return. It saves the video to a video file with the same\
-    encoding. It will be saved in the same path with the output file name.
+    :return: filename path of the created video
     """
     if output_filename == "":
         img_name = filename_path.name.split(".")[0]
@@ -38,6 +37,8 @@ def cut_n_secs(filename_path: pathlib.Path, start: int,
 
     ut.check_shell_stderr(stderr, f"Could not cut the video {filename_path}")
 
+    return output_filename_path
+
 
 def main():
     """
@@ -52,7 +53,9 @@ def main():
     print(start_cut_points)
 
     for _st in start_cut_points:
-        cut_n_secs(video_filename, _st, n_secs_cut)
+        out_filename = cut_n_secs(video_filename, _st, n_secs_cut)
+
+        print(f"Created video {out_filename}")
 
 
 if __name__ == "__main__":
