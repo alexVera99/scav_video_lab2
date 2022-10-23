@@ -1,0 +1,80 @@
+"""Solution for Exercise 3."""
+import pathlib
+import utils as ut
+
+
+def get_video_dims(filename_path: pathlib.Path) -> tuple:
+    """
+    Get resolution of the video frames.
+
+    :param filename_path:
+    :return: width and height of the video.
+    """
+    cmd = ["ffprobe", "-v", "error",
+           "-select_streams", "v:0",
+           "-show_entries", "stream=width,height",
+           "-of", "csv=s=x:p=0", filename_path]
+
+    output, stderr = ut.exec_in_shell_wrapper(cmd)
+
+    ut.check_shell_stderr(stderr, f"Could not get the size of "
+                                  f"the video {filename_path}")
+
+    width, height = output.decode().replace("\n", "").split("x")
+
+    return int(width), int(height)
+
+
+def resize_video(filename_path: pathlib.Path,
+                 width: int = -1, height: int = -1,
+                 output_filename: str = ""):
+    """
+    Resize in the given dimensions.
+
+    :param filename_path: video filename path
+    :param height: expected height
+    :param width: expected width
+    :param output_filename: output filename
+    :return: no return
+    """
+    '''w_video, h_video = get_video_dims(filename_path)
+
+    if w_video < width or h_video < height:
+        raise Exception(f"Video resolution [{w_video}x{h_video}]"
+                        " is smaller than the resize dimensions"
+                        f" [{width}x{height}]")'''
+
+    if output_filename == "":
+        video_name = filename_path.name.split(".")[0]
+        output_filename = f"{video_name}_resize_{width}_{height}"
+
+    output_filename_path = ut.rename_from_path(filename_path, output_filename)
+
+    cmd = ["ffmpeg", "-y", "-i", filename_path,
+           "-vf", f"scale={width}:{height}",
+           "-preset", "slow", "-crf", "18",
+           output_filename_path]
+
+    _, stderr = ut.exec_in_shell_wrapper(cmd)
+
+    ut.check_shell_stderr(stderr,
+                          f"Could not resize the video {filename_path}")
+
+
+def main():
+    """
+    Test the above functions.
+
+    :return no return
+    """
+    video_filename = pathlib.Path("../data/bbb.mp4")
+
+    resolutions_w_h = [[-1, 720], [-1, 480],
+                       [360, 240], [160, 120]]
+
+    for _w, _h in resolutions_w_h:
+        resize_video(video_filename, _w, _h)
+
+
+if __name__ == "__main__":
+    main()
