@@ -37,12 +37,14 @@ def resize_video(filename_path: pathlib.Path,
     :param output_filename: output filename
     :return: no return
     """
-    '''w_video, h_video = get_video_dims(filename_path)
+    w_video, h_video = get_video_dims(filename_path)
 
-    if w_video < width or h_video < height:
+    '''if w_video < width or h_video < height:
         raise Exception(f"Video resolution [{w_video}x{h_video}]"
                         " is smaller than the resize dimensions"
                         f" [{width}x{height}]")'''
+
+    width, height = get_new_scaling(w_video, h_video, width, height)
 
     if output_filename == "":
         video_name = filename_path.name.split(".")[0]
@@ -61,6 +63,58 @@ def resize_video(filename_path: pathlib.Path,
                           f"Could not resize the video {filename_path}")
 
 
+def force_to_be_multiple_of_2(num: int):
+    """
+    Force a number to be even.
+    :param num: any integer number
+    :return: even integer number
+    """
+    if num % 2 == 0:
+        return num
+    return num + 1
+
+
+def get_new_scaling(width: int, height: int,
+                    target_width: int = -1,
+                    target_height: int = -1) -> tuple:
+    """
+    Given a dimension, it computes the other dimension as a multiple of 2.\
+    Only one target dimension should be given, and it should be a multiple of 2.\
+    Example: automatic_scaling(w, h, target_width = 280), or \
+    automatic_scaling(w, h, target_height = 280)
+
+    :param width: original width
+    :param height: original height
+    :param target_width: target width. If -1, it will be computed
+    :param target_height: target height. If -1, it will be computed
+    :return: a tuple with the new dimensions: (w, h)
+    """
+    if target_width == -1:
+        if not target_height % 2 == 0:
+            raise Exception(f"target_height ({target_height}) is not "
+                            "multiple of 2.")
+        result = round(target_height / height * width)
+
+        result = force_to_be_multiple_of_2(result)
+
+        w_h = (result, target_height)
+
+    elif target_height == -1:
+        if not target_width % 2 == 0:
+            raise Exception(f"target_height ({target_width}) is not "
+                            "multiple of 2.")
+        result = round(target_width / width * height)
+
+        result = force_to_be_multiple_of_2(result)
+
+        w_h = (target_width, result)
+
+    else:
+        w_h = (target_width, target_height)
+
+    return w_h
+
+
 def main():
     """
     Test the above functions.
@@ -69,8 +123,7 @@ def main():
     """
     video_filename = pathlib.Path("../data/bbb.mp4")
 
-    resolutions_w_h = [[-1, 720], [-1, 480],
-                       [360, 240], [160, 120]]
+    resolutions_w_h = [[360, 240], [160, 120]]
 
     for _w, _h in resolutions_w_h:
         resize_video(video_filename, _w, _h)
