@@ -29,7 +29,8 @@ def resize_video(filename_path: pathlib.Path,
                  width: int = -1, height: int = -1,
                  output_filename: str = ""):
     """
-    Resize in the given dimensions.
+    Resize in the given dimensions. Inspired from \
+    https://ottverse.com/change-resolution-resize-scale-video-using-ffmpeg/
 
     :param filename_path: video filename path
     :param height: expected height
@@ -123,7 +124,8 @@ def main():
     """
     video_filename = pathlib.Path("../data/bbb.mp4")
 
-    resolutions_w_h = [[360, 240], [160, 120]]
+    resolutions_w_h = [[-1, 720], [-1, 480],
+                       [360, 240], [160, 120]]
 
     for _w, _h in resolutions_w_h:
         resize_video(video_filename, _w, _h)
