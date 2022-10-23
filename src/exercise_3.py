@@ -36,7 +36,7 @@ def resize_video(filename_path: pathlib.Path,
     :param height: expected height
     :param width: expected width
     :param output_filename: output filename
-    :return: no return
+    :return: created video filename
     """
     w_video, h_video = get_video_dims(filename_path)
 
@@ -62,6 +62,8 @@ def resize_video(filename_path: pathlib.Path,
 
     ut.check_shell_stderr(stderr,
                           f"Could not resize the video {filename_path}")
+
+    return output_filename_path
 
 
 def force_to_be_multiple_of_2(num: int):
@@ -128,7 +130,8 @@ def main():
                        [360, 240], [160, 120]]
 
     for _w, _h in resolutions_w_h:
-        resize_video(video_filename, _w, _h)
+        out_filename = resize_video(video_filename, _w, _h)
+        print(f"Video created in {out_filename}")
 
 
 if __name__ == "__main__":
