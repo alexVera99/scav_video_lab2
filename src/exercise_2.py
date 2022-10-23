@@ -13,7 +13,7 @@ def create_video_with_yuv_histogram(filename_path: pathlib.Path,
 
     :param filename_path: video filename path
     :param output_filename: output filename
-    :return: no return
+    :return: video created filename
     """
     if output_filename == "":
         video_name = filename_path.name.split(".")[0]
@@ -38,6 +38,8 @@ def create_video_with_yuv_histogram(filename_path: pathlib.Path,
     ut.check_shell_stderr(stderr,
                           f"Could not get the YUV histogram {filename_path}")
 
+    return output_filename_path
+
 
 def main():
     """
@@ -47,7 +49,9 @@ def main():
     """
     video_filename = pathlib.Path("../data/bbb.mp4")
 
-    create_video_with_yuv_histogram(video_filename)
+    out_filename = create_video_with_yuv_histogram(video_filename)
+
+    print(f"Video created in {out_filename}")
 
 
 if __name__ == "__main__":
