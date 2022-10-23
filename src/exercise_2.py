@@ -7,7 +7,9 @@ import utils as ut
 def create_video_with_yuv_histogram(filename_path: pathlib.Path,
                                     output_filename: str = ""):
     """
-    Create a video with the YUV histogram overlaid.
+    Create a video with the YUV histogram overlaid. \
+    Inspired from\
+    https://trac.ffmpeg.org/wiki/Histogram
 
     :param filename_path: video filename path
     :param output_filename: output filename
