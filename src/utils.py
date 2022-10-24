@@ -9,6 +9,7 @@ SHELL_ERRORS = ["error",
                 "invalid",
                 "no such file or directory"]
 
+
 def exec_in_shell_wrapper(cmd: list) -> tuple:
     """
     Execute command in Linux shell.
