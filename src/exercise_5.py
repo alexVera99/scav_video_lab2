@@ -74,7 +74,7 @@ def execute_exercise_4_option():
 
     while True:
         option = input("Output audio of the video to (M)ono or (S)tereo?\n")
-        option = option.lower()
+
         if option.lower() in options:
             print("\nError: Please select (M) for mono or (S) for stereo.")
             continue
