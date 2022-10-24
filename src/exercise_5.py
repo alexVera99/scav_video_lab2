@@ -110,7 +110,7 @@ def main():
                            "4) Exercise 4\n"))
 
         if option in options:
-            print(f"\nYou have selected option {option}")
+            print(f"\nYou have selected option {option}\n")
             break
 
         print("Please, provide a valid option")
