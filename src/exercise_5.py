@@ -76,8 +76,8 @@ def execute_exercise_4_option():
         option = input("Output audio of the video to (M)ono or (S)tereo?\n")
         option = option.lower()
         if option.lower() in options:
-            print("Error: Please select (M) for mono or (S) for stereo.")
-            break
+            print("\nError: Please select (M) for mono or (S) for stereo.")
+            continue
 
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
@@ -108,8 +108,8 @@ def main():
                            "4) Exercise 4\n"))
 
         if option in options:
-            print(f"You have selected option {option}")
-            break
+            print(f"\nYou have selected option {option}")
+            continue
 
         print("Please, provide a valid option")
     if option == 1:
