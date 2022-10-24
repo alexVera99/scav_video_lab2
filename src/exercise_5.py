@@ -1,3 +1,5 @@
+"""Exercise 5: It is an application merging the behaviour of all the\
+other exercises."""
 import pathlib
 
 import exercise_1 as ex_1
@@ -100,8 +102,8 @@ def main():
 
     :return:
     """
-    N = 4
-    options = [i for i in range(1, N + 1)]
+    n_options = 4
+    options = list(range(1, n_options + 1))
 
     while True:
         option = int(input("Select the exercise: \n"

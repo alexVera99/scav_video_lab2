@@ -40,11 +40,6 @@ def resize_video(filename_path: pathlib.Path,
     """
     w_video, h_video = get_video_dims(filename_path)
 
-    '''if w_video < width or h_video < height:
-        raise Exception(f"Video resolution [{w_video}x{h_video}]"
-                        " is smaller than the resize dimensions"
-                        f" [{width}x{height}]")'''
-
     width, height = get_new_scaling(w_video, h_video, width, height)
 
     if output_filename == "":
@@ -96,7 +91,7 @@ def get_new_scaling(width: int, height: int,
         raise Exception("At least one dimension should be given")
 
     if target_width == -1:
-        if not target_height % 2 == 0:
+        if target_height % 2 != 0:
             raise Exception(f"target_height ({target_height}) is not "
                             "multiple of 2.")
         result = round(target_height / height * width)
@@ -106,7 +101,7 @@ def get_new_scaling(width: int, height: int,
         w_h = (result, target_height)
 
     elif target_height == -1:
-        if not target_width % 2 == 0:
+        if target_width % 2 != 0:
             raise Exception(f"target_height ({target_width}) is not "
                             "multiple of 2.")
         result = round(target_width / width * height)
