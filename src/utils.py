@@ -37,7 +37,8 @@ def check_shell_stderr(stderr,
     stderr = stderr.decode('ascii')
 
     if (stderr.lower().__contains__("error") or
-       stderr.lower().__contains__("failed")):
+       stderr.lower().__contains__("failed") or
+       stderr.lower().__contains__("invalid")):
         logging.error(logging_output + "\n" + stderr)
         raise Exception(logging_output)
 
