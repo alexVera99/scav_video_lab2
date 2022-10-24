@@ -111,7 +111,7 @@ def main():
 
         if option in options:
             print(f"\nYou have selected option {option}")
-            continue
+            break
 
         print("Please, provide a valid option")
     if option == 1:
