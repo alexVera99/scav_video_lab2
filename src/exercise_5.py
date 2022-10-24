@@ -105,10 +105,11 @@ def main():
 
     while True:
         option = int(input("Select the exercise: \n"
-                           "1) Exercise 1\n"
-                           "2) Exercise 2\n"
-                           "3) Exercise 3\n"
-                           "4) Exercise 4\n"))
+                           "1) Exercise 1: Trim a video.\n"
+                           "2) Exercise 2: Overlay YUV histogram in video.\n"
+                           "3) Exercise 3: Resize a video.\n"
+                           "4) Exercise 4: Change audio of a video"
+                           "from stereo to mono, and vice versa\n"))
 
         if option in options:
             print(f"\nYou have selected option {option}\n")
