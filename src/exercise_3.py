@@ -30,7 +30,7 @@ def resize_video(filename_path: pathlib.Path,
                  output_filename: str = ""):
     """
     Resize in the given dimensions. Inspired from \
-    https://ottverse.com/change-resolution-resize-scale-video-using-ffmpeg/
+    https://ottverse.com/change-resolution-resize-scale-video-using-ffmpeg/.
 
     :param filename_path: video filename path
     :param height: expected height
@@ -64,6 +64,7 @@ def resize_video(filename_path: pathlib.Path,
 def force_to_be_multiple_of_2(num: int):
     """
     Force a number to be even.
+
     :param num: any integer number
     :return: even integer number
     """
@@ -79,7 +80,7 @@ def get_new_scaling(width: int, height: int,
     Given a dimension, it computes the other dimension as a multiple of 2.\
     Only one target dimension should be given, and it should be a multiple of 2.\
     Example: automatic_scaling(w, h, target_width = 280), or \
-    automatic_scaling(w, h, target_height = 280)
+    automatic_scaling(w, h, target_height = 280).
 
     :param width: original width
     :param height: original height

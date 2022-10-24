@@ -68,7 +68,7 @@ def execute_exercise_3_option():
 
 def execute_exercise_4_option():
     """
-    Execute logic for exercise 4
+    Execute logic for exercise 4.
 
     :return: no return
     """
@@ -99,8 +99,10 @@ def execute_exercise_4_option():
 
 def main():
     """
+    Execute the logic of the main menu to select which exercise you \
+    want to use.
 
-    :return:
+    :return: no return
     """
     n_options = 4
     options = list(range(1, n_options + 1))
