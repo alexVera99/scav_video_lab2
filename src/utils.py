@@ -4,6 +4,10 @@ import pathlib
 import subprocess
 import logging
 
+SHELL_ERRORS = ["error",
+                "failed",
+                "invalid",
+                "no such file or directory"]
 
 def exec_in_shell_wrapper(cmd: list) -> tuple:
     """
@@ -36,9 +40,9 @@ def check_shell_stderr(stderr,
     # Convert to str
     stderr = stderr.decode('ascii')
 
-    if (stderr.lower().__contains__("error") or
-       stderr.lower().__contains__("failed") or
-       stderr.lower().__contains__("invalid")):
+    for _e in SHELL_ERRORS:
+        if not stderr.lower().__contains__(_e):
+            continue
         logging.error(logging_output + "\n" + stderr)
         raise Exception(logging_output)
 
