@@ -1,3 +1,5 @@
+import pathlib
+
 import exercise_1 as ex_1
 import exercise_2 as ex_2
 import exercise_3 as ex_3
@@ -12,9 +14,10 @@ def execute_exercise_1_option():
     """
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
+    video_filename = pathlib.Path(video_filename)
 
-    start_cut = input("Second number to start cut: ")
-    n_secs_cut = input("Number of seconds of the resulting video: ")
+    start_cut = int(input("Second number to start cut: "))
+    n_secs_cut = int(input("Number of seconds of the resulting video: "))
 
     out_filename = ex_1.cut_n_secs(video_filename, start_cut, n_secs_cut)
 
@@ -29,6 +32,7 @@ def execute_exercise_2_option():
     """
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
+    video_filename = pathlib.Path(video_filename)
 
     out_filename = ex_2.create_video_with_yuv_histogram(video_filename)
 
@@ -43,14 +47,15 @@ def execute_exercise_3_option():
     """
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
+    video_filename = pathlib.Path(video_filename)
 
-    target_width = input("Target width (must be multiple of 2 or "
-                         "-1 to create automatically based on the "
-                         "other dimension):\n")
+    target_width = int(input("Target width (must be multiple of 2 or "
+                             "-1 to create automatically based on the "
+                             "other dimension):\n"))
 
-    target_height = input("Target height (must be multiple of 2 or "
-                          "-1 to create automatically based on the "
-                          "other dimension):\n")
+    target_height = int(input("Target height (must be multiple of 2 or "
+                              "-1 to create automatically based on the "
+                              "other dimension):\n"))
 
     out_filename = ex_3.resize_video(video_filename,
                                      target_width,
@@ -76,6 +81,7 @@ def execute_exercise_4_option():
 
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
+    video_filename = pathlib.Path(video_filename)
 
     if option == "m":
         out_filename = ex_4.video_audio_stereo_2_mono(video_filename)
