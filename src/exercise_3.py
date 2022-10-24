@@ -92,6 +92,9 @@ def get_new_scaling(width: int, height: int,
     :param target_height: target height. If -1, it will be computed
     :return: a tuple with the new dimensions: (w, h)
     """
+    if target_width == -1 and target_height == -1:
+        raise Exception("At least one dimension should be given")
+
     if target_width == -1:
         if not target_height % 2 == 0:
             raise Exception(f"target_height ({target_height}) is not "
