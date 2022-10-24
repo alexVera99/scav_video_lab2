@@ -86,10 +86,10 @@ def execute_exercise_4_option():
                            " or absolute valid path): ")
     video_filename = pathlib.Path(video_filename)
 
-    if option == "m":
+    if option == options[0]:
         out_filename = ex_4.video_audio_stereo_2_mono(video_filename)
 
-    elif option == "s":
+    elif option == options[1]:
         out_filename = ex_4.video_audio_mono_2_stereo(video_filename)
 
     print(f"Video created in {out_filename}")
