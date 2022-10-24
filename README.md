@@ -8,8 +8,6 @@ own configurations.
 
 # Known issues
 This is a list of known issues:
-* In exercise 3, if we convert bbb.mp4 with dimensions
-640x360 to `target width = 200` and `target height = -1`,
-which means automatically computing target height. It outputs
-a video with dimensions 199x112. The target height is correct
-but the target width is not.
+* In exercise 3, it rescales the video with 1 pixel
+less in the width dimension. By looking at the logs
+of FFMPEG and the given command, everything looks good.
