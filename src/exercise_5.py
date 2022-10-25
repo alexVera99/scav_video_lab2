@@ -47,17 +47,37 @@ def execute_exercise_3_option():
 
     :return:
     """
+    preset_resolutions = {1: ["720p", [1280, 720]],
+                          2: ["480p", [640, 480]],
+                          3: ["360x240", [360, 240]],
+                          4: ["160x120", [160, 120]]}
+
     video_filename = input("Video filename (it must be a valid relative"
                            " or absolute valid path): ")
     video_filename = pathlib.Path(video_filename)
 
-    target_width = int(input("Target width (must be multiple of 2 or "
-                             "-1 to create automatically based on the "
-                             "other dimension):\n"))
+    use_presets = input("Do you wan to use presets? (Y) or (N): ")
 
-    target_height = int(input("Target height (must be multiple of 2 or "
-                              "-1 to create automatically based on the "
-                              "other dimension):\n"))
+    if use_presets.lower() == "y":
+        for key, value in preset_resolutions.items():
+            print(f"{key}) {value[0]}")
+
+        while True:
+            preset_option = int(input("Select option: "))
+            if preset_option in list(preset_resolutions.keys()):
+                break
+        preset = preset_resolutions[preset_option]
+        target_width = preset[1][0]
+        target_height = preset[1][1]
+
+    else:
+        target_width = int(input("Target width (must be multiple of 2 or "
+                                 "-1 to create automatically based on the "
+                                 "other dimension):\n"))
+
+        target_height = int(input("Target height (must be multiple of 2 or "
+                                  "-1 to create automatically based on the "
+                                  "other dimension):\n"))
 
     out_filename = ex_3.resize_video(video_filename,
                                      target_width,
