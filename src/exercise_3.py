@@ -49,6 +49,7 @@ def resize_video(filename_path: pathlib.Path,
     output_filename_path = ut.rename_from_path(filename_path, output_filename)
 
     cmd = ["ffmpeg", "-y", "-i", filename_path,
+           "-aspect:v", f"{width}:{height}",
            "-vf", f"scale={width}:{height}",
            "-preset", "slow", "-crf", "18",
            output_filename_path]
