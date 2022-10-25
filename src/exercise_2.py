@@ -24,12 +24,12 @@ def create_video_with_yuv_histogram(filename_path: pathlib.Path,
     # Computing histogram size
     w_video, h_video = ex_3.get_video_dims(filename_path)
     w_hist = w_video // 4
-    h_video = h_video // 2
+    h_hist = h_video // 2
 
     cmd = ["ffmpeg", "-y", "-i", filename_path,
            "-vf",
            f"split=2[a][b],"
-           f"[b]histogram,format=yuva444p,scale={w_hist}:{h_video}[hh],"
+           f"[b]histogram,format=yuva444p,scale={w_hist}:{h_hist}[hh],"
            f"[a][hh]overlay",
            output_filename_path]
 
